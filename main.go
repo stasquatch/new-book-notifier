@@ -9,13 +9,14 @@ import (
 )
 
 // consider any new books to be published within the last week
-var STARTING_TIMEFRAME = time.Now().Add(-7 * 24 * time.Hour)
-
-func main() {
-	authorList := []string{
+var (
+	STARTING_TIMEFRAME = time.Now().Add(-7 * 24 * time.Hour)
+	authorList         = []string{
 		"Katie Ruggle",
 	}
+)
 
+func main() {
 	for i := range authorList {
 		authorName := authorList[i]
 
