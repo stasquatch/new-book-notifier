@@ -22,3 +22,7 @@ func IsNewBook(publishedDate string, startingTimeframe time.Time) (bool, error) 
 
 	return pubDate.After(startingTimeframe), nil
 }
+
+func strPtr(s string) *string {
+	return &s
+}
