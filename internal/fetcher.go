@@ -28,7 +28,7 @@ type GoogleVolumeInfo struct {
 	PublishedDate string   `json:"publishedDate"`
 }
 
-func GetBooksByAuthor(authorName string) ([]GoogleBookItem, error) {
+func getBooksByAuthor(authorName string) ([]GoogleBookItem, error) {
 	client := http.Client{
 		Timeout: 30 * time.Second,
 	}
