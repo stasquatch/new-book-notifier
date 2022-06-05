@@ -12,6 +12,18 @@ var (
 	STARTING_TIMEFRAME = time.Now().Add(-7 * 24 * time.Hour)
 	authorList         = []string{
 		"Katie Ruggle",
+		"Stephen Graham Jones",
+		"Emily Henry",
+		"Sally Thorne",
+		"Abby Jimenez",
+		"Talia Hibbert",
+		"Emery Lee",
+		"Annabeth Albert",
+		"Jasmine Guillory",
+		"Helen Hoang",
+		"Leigh Bardugo",
+		"Jaci Burton",
+		"Mhairi McFarlane",
 	}
 )
 
