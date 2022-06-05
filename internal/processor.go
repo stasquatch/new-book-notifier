@@ -2,6 +2,7 @@ package internal
 
 import (
 	"errors"
+	"strings"
 	"time"
 
 	"github.com/stasquatch/new-book-notifier/internal/helpers"
@@ -41,7 +42,23 @@ func filterNewBooksForAuthor(data []GoogleBookItem, authorName string, startingT
 			// silently fail and continue
 			continue
 		}
-		if isNew {
+		if !isNew {
+			continue
+		}
+
+		isNotDuplicate := false
+		if len(newBookTitles) == 0 {
+			isNotDuplicate = true
+		} else {
+			for i := range newBookTitles {
+				if book.Title == newBookTitles[i] || strings.Contains(strings.ToLower(book.Title), "untitled") {
+					break
+				}
+				isNotDuplicate = true
+			}
+		}
+
+		if isNotDuplicate {
 			newBookTitles = append(newBookTitles, book.Title)
 		}
 	}
