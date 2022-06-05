@@ -26,7 +26,7 @@ func IsNewBook(publishedDate string, startingTimeframe time.Time) (bool, error) 
 
 func FormatNewBooksAsString(newBooks map[string][]string) string {
 	if len(newBooks) == 0 {
-		return ""
+		return "No new books"
 	}
 
 	str := ""

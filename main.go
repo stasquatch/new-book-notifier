@@ -21,8 +21,6 @@ func main() {
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		if result != "" {
-			fmt.Println(result)
-		}
+		fmt.Println(result)
 	}
 }
