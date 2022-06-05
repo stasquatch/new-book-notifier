@@ -1,20 +1,20 @@
 package internal
 
 import (
-	"log"
+	"errors"
 	"time"
 
 	"github.com/stasquatch/new-book-notifier/internal/helpers"
 )
 
-func ProcessBookData(authorList []string, startingTimeframe time.Time) {
+func ProcessBookData(authorList []string, startingTimeframe time.Time) (string, error) {
 	allNewBooksByAuthor := make(map[string][]string)
 	for i := range authorList {
 		authorName := authorList[i]
 
 		data, err := getBooksByAuthor(authorName)
 		if err != nil {
-			log.Panicln(err)
+			return "", errors.New(err.Error())
 		}
 
 		newBooks := filterNewBooksForAuthor(data, authorName, startingTimeframe)
@@ -22,7 +22,8 @@ func ProcessBookData(authorList []string, startingTimeframe time.Time) {
 			allNewBooksByAuthor[authorName] = newBooks
 		}
 	}
-	// TODO: send email with contents of allNewBooksByAuthor
+
+	return helpers.FormatNewBooksAsString(allNewBooksByAuthor), nil
 }
 
 func filterNewBooksForAuthor(data []GoogleBookItem, authorName string, startingTimeframe time.Time) []string {
@@ -37,7 +38,7 @@ func filterNewBooksForAuthor(data []GoogleBookItem, authorName string, startingT
 
 		isNew, err := helpers.IsNewBook(book.PublishedDate, startingTimeframe)
 		if err != nil {
-			log.Printf("error with book %s, skipping. error: %s", book.Title, err.Error())
+			// silently fail and continue
 			continue
 		}
 		if isNew {

@@ -52,3 +52,32 @@ func TestIsNewBook(t *testing.T) {
 		})
 	}
 }
+
+func TestFormatNewBooksAsString(t *testing.T) {
+	t.Run("successfully concats a map of authors/books", func(t *testing.T) {
+		b := make(map[string][]string, 2)
+		b["one"] = []string{"single book title"}
+		b["two"] = []string{"two books", "will go here"}
+		result := FormatNewBooksAsString(b)
+		assert.Equal(t, `The following authors have published something new!
+
+one: single book title
+
+two: two books, will go here`, result)
+	})
+
+	t.Run("successfully concats a map of a single author/book", func(t *testing.T) {
+		b := make(map[string][]string, 1)
+		b["one"] = []string{"single"}
+		result := FormatNewBooksAsString(b)
+		assert.Equal(t, `The following author has published something new!
+
+one: single`, result)
+	})
+
+	t.Run("returns empty string if map is empty", func(t *testing.T) {
+		b := make(map[string][]string, 0)
+		result := FormatNewBooksAsString(b)
+		assert.Empty(t, result)
+	})
+}

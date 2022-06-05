@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/stasquatch/new-book-notifier/internal"
@@ -16,5 +17,12 @@ var (
 
 func main() {
 	// kick off the whole shebang!
-	internal.ProcessBookData(authorList, STARTING_TIMEFRAME)
+	result, err := internal.ProcessBookData(authorList, STARTING_TIMEFRAME)
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		if result != "" {
+			fmt.Println(result)
+		}
+	}
 }
