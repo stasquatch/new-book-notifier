@@ -17,7 +17,7 @@ crontab -e
 Note: you'll probably need to change the file path and [cron scheduling](https://crontab.guru/)
 
 ```sh
-*/10 10 * * 0 cd ~/Code/new-book-notifier && /usr/local/bin/go run main.go | mail -s "New book alert" stacyharrison
+10 10 * * 0 cd ~/Code/new-book-notifier && /usr/local/bin/go run main.go | mail -s "New book alert" stacyharrison
 ```
 
 ### Setting up your email forwarding
